@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-Sep-2018, 11:18:03
+    Author     : DELL
+*/
+/*css break point
+480px: smart phone
+481-768px: tablet
+768-1024: tablet in wdith
+>1024: desktop*/
+
+/*need to learn mobile web design*/
+
+@media only screen and (max-width: 1200px) {
+    .my-row { padding: 0 2%;}
+}
+@media only screen and (max-width: 1023px) {
+    body { font-size: 18px; }
+    h1 {
+        font-size: 220%
+    }
+    .my-icon-big { font-size: 300%; }
+    .my-icon-small {
+        width: 20px;
+        margin-right: 5px;
+    }
+    .my-btn-img img { height: 50px;}
+}
+@media only screen and (max-width: 767px) {
+    h2 { font-size: 160%; }
+    [class*='my-1-of-'] {
+        width: 100%;
+        margin: 0 0 4% 0;
+    }
+    .header-nav {
+        display: none;
+        /*        display:none; take no space, removed from normal flow
+                visibility: hidden; there's stil space, present in normal flow*/
+    }
+    .p-longline {
+        width: 80%;
+        margin: 0 10%;
+    }
+    .my-steps-box:first-of-type { text-align: center; }
+    .my-steps-box > img { width: 30%;}
+    /*why margin-bottom of .p-longline ko tac dung
+    while <i> sec-intro .icon-big margin-bottom co tac dung
+    padding-right of step > img in style.css co tac dung*/
+    /*    .my-city-box { text-align: center; }*/
+
+    /*    .my-city-box > img {
+            width: 50%;
+            lam sao khi o 480-1023px thi city-box col-1-of-2 nhu trang chinh udemy???
+            #codeKnowledge #design 
+            
+        }*/
+
+    
+}
+@media only screen and (max-width: 480px) {
+    h1 { font-size: 150%;}
+    h2 { font-size: 130%;}
+    
+    .my-btn-img img { height: 40px;}
+    
+    .hero-text-box .my-btn{
+        font-size: 90%;
+        padding: 7px 10px;
+        margin-right: 15px;
+    }
+    .hero-text-box .my-btn:last-of-type { margin-right: 0; }
+    .p-longline { font-size: 80%; }
+    
+    .my-footer-nav, .my-social-links {
+        float: none;
+        /*xoa float: trong myStyle.css*/
+        text-align: center;
+    }
+    .my-footer-nav li, .my-social-links li{ margin-right: 7px;}
+    .my-footer-nav li:last-of-type, .my-social-links li:last-of-type { margin-right: 0;}
+}

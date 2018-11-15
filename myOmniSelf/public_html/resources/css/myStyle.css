@@ -1,0 +1,641 @@
+/* 
+    Created on : 28-Aug-2018, 14:13:52
+    Author     : haanhn_
+*/
+
+/*sites: http://www.0to255.com/*/
+/**
+* document notes:
+* #cleanCode 
+* #design
+* ???
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*html,*/
+/*why*/
+body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    /*text-rendering: optimizeLegibility;*/ /* why*/
+    /*overflow-x: hidden;*/
+}
+/*style applies to all elem inherits from body*/
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+    /*f-weight of h1 doesnt affect by (maybe ? inherit from) body*/
+    /*#design big headlines -> decrease font weight*/
+}
+/*#design #cleanCode
+h1, h2, h3' shared props (text-transform: uppercase; font-weight: 300;)
+font-size,... : spec prop*/
+h1 {
+    color: #fff;
+    margin-top: 0;
+    /*bc normalize.css*/
+    margin-bottom: 20px;
+    /*overriden normalize.css*/
+    font-size: 250%;
+    /*refer to parent font-size*/
+    letter-spacing: 1px;
+    word-spacing: 3px;    
+}
+h2 {
+    text-align: center;
+/*    text-transform: uppercase;
+        font-weight: 300;*/
+    /*bad #design*/
+    font-size: 180%;
+    /*#design size of h2 < h1 to the extents that she you can see the difference;
+    not h1:250%; h2:225%; 
+    when it comes to big title*/
+    margin-bottom: 30px;
+}
+h2:after {
+    content: "";
+    display: block;
+    margin: 30px auto 0 auto;
+    background-color: #e67e22;
+    /*for the containing block itself, not the text in it*/
+    width: 100px;
+    height: 2px;
+    /*text-align: center; for the content in it (text, etc), not itself*/
+}
+h3 {
+    font-size: 110%;
+    margin-bottom: 10px;
+    /*#design #cleanCode margin bottom not top*/
+}
+section {
+    padding: 80px 0;
+}
+ul {
+    list-style-type: none;
+}
+/*------------------------------*/
+/*REUSABLE COMPONENTS*/
+/*------------------------------*/
+
+/*BUTTONS*/
+/*state: :link :visited :hover (link) :active (all elems)
+:active can be used by all elems: when elem is selected (clicked)
+:active MUST come after :hover (if present) in the CSS definition in order to be effective!*/
+/*#design*/
+
+.my-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    border-radius: 200px;
+    /*con so 200px nay tuong duong 300px hay 180px (case: height < 200px) 
+    bcause goal: bo tron 2 vertical borders (associates w/ height)*/
+/*    divided into 4 angles: top.bottom * left.right - khi bo tron, moi goc thi: w/2 & h/2
+    ex1: unit length (px): w=100, height=50 (height < width)
+    border-radius: 25px; -> top-left,etc: height=50/2=25
+    => even: border-radius: > 25px; thi result same w/ b-rad: 25px
+    ex2: same with percentage*/
+    margin-right: 20px;
+    /*khac vs instr -> .btn-full*/
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+.my-btn:last-of-type {
+    margin-right: 0;
+    /*khac vs instr (ko co)*/
+}
+.my-btn-orange:link
+, .my-btn-orange:visited
+/*bc when visited (or clicked when href="#") -> color to default*/
+{
+    border: 1px solid #e67e22;
+    background-color: #e67e22;
+    color: #fff;
+    /*#design flatUiColor site*/
+}
+.my-btn-ghost:link
+, .my-btn-ghost:visited 
+{
+    border: 1px solid #e67e22;
+    color: #e67e22;
+}
+.my-btn-ghost:hover, .my-btn-orange:hover {
+    border: 1px solid #cf6d17;
+    background-color: #cf6d17;
+    color: #fff;
+}
+
+/*MY-ROW*/
+.my-row {
+    max-width: 1140px; /*#design important feature */
+    margin: 0 auto;
+    /*background-color: palegoldenrod;*/
+}
+.my-row:before, /*why??*/
+.my-row:after {
+    content: "";
+    display:table;
+/*    cung giong nhu class .clearfix in blogpost.html (dc bo trong the div -> phai co block elem A, roi moi clear after A)*/
+}
+.my-row:after {
+    clear: both;
+}
+.my-1-of-2 {
+    width: 49.2%;
+}
+.my-1-of-3 {
+    width: 32.26%;
+}
+.my-1-of-4 {
+    width: 23.8%;
+    /*margin-left:1.6%; (100 - 1.6*3)/4 = 23.8
+    .my-col
+    myGrid.css
+    */
+}
+/*CLEAR-FIX*/
+.my-clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/*------------------------------*/
+/*HEADER*/
+/*------------------------------*/
+/*NAVIGATION*/
+header.my-header {
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/hero.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(img/hero.jpg);
+    /*RGBA color values are an extension of RGB color values with an alpha channel - which specifies the opacity for a color.*/
+    /*linear-gr chuyen tu mau nay sang mau khac follow a direction (to right, top left, etc)*/
+    background-size: cover;
+    background-position: center;
+    /*make the img centered*/
+    background-attachment: fixed;
+    height: 100vh;
+    position: relative;
+    /*for .hero-text-box position: absolute;*/
+}
+.header-logo {
+    float: left;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 20px;
+    /*cho case screen nho dan*/
+}
+/*#cleanCode tach rieng tinh chat cua .header-logo-small, ko de chung trong .my-header-menu-sticky .header-logo-small*/
+.header-logo-small {
+   display: none;
+   width: 50px;
+   margin: 5px 0;
+   float: left;
+}
+.header-nav {
+    float: right;
+    margin: 50px 0;
+}
+.header-nav li {
+    /*list-style-type: none;*/
+    /*#cleanCode da o tren ul*/
+    display: inline-block;
+    margin-right: 20px;
+}
+/*.header-nav li:last-of-type {
+    margin-right: 0;
+    khong nen vi cho case screen get smaller -> sat right edge of the screens
+}*/
+.header-nav li a {
+    /*#cleanCode khi 1 div has the same color -> nen de o parent div thay vi child-elem, 
+    nhung vi a must specify color explicitly, no ko ke thu hay gi het*/
+    color: #fff;
+    font-size: 90%;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    transition: border-bottom 0.2s;
+}
+.header-nav li a:link, a:visited {
+    border-bottom: 2px solid transparent;
+/*    color: #fff;
+    font-size: 90%;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    transition: border-bottom 0.2s;*/
+}
+.header-nav li a:hover, a:active {
+    border-bottom: 2px solid #e67e22;
+}
+/*STICKY*/
+/*#cleanCode design 1 class spec cho sticky .my-header-menu-sticky*/
+.my-header-menu-sticky{
+    background-color: #fff;
+    /*border-bottom: 2px solid #ccc;*/
+    box-shadow: 0px 2px 3px #ccc;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    /*top: 0px;*/
+}
+.my-header-menu-sticky .header-logo {
+    display: none;
+}
+.my-header-menu-sticky .header-logo-small {
+    display: block;
+}
+.my-header-menu-sticky .header-nav li a {
+    color: #555;
+    padding-bottom: 20px;
+}
+.my-header-menu-sticky .header-nav {
+    margin: 20px 0;
+}
+/*instructor code*/
+/*.hero-text-box {
+    width: 1140px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    translate in % -> size of the bounding box itself
+    The translate() method moves an element from its current position:
+    performance: translate > position (search Ggl)
+}*/
+/*my code*/
+.hero-text-box {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+/*------------------------------*/
+/*SECTION-INTRO*/
+/*------------------------------*/
+/*.section-intro {
+    color: #888;
+}
+    #cleanCode: unless the div have a spec color, dont do it, put the default color in * or body elem
+*/
+.p-longline {
+    width: 70%;
+    margin-left: 15%;
+    margin-bottom: 30px;
+}
+.my-intro-box {
+    padding: 1%;
+}
+.my-intro-box i {
+    color: #e67e22;
+    /*#cleanCode xem .my-icon-big ko de color (spec prop in gen class)*/
+}
+/*.intro-header, .intro-boxes {
+    width: 80%;
+    margin: 0 auto;
+}*/
+/*.intro-header h2 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 5vh;
+}*/
+/*.my-1-of-4 {*/
+    /*width: 25%;*/
+    /*padding: 10px 15px;*/
+/*    display: inline-block;*/
+    /*float: left;*/
+    /*inline-block leaves some space while float leaves no space beetween elems*/
+/*}*/
+/*------------------------------*/
+/*-----MY-MEAL-----*/
+/*------------------------------*/
+.section-my-meals {
+    padding: 0;
+}
+/*  #doc Opac
+    1. Opacity: postprocessing operation. 
+    Conceptually, after the element (including its descendants) is rendered into an RGBA offscreen image, 
+    the opacity specifies how to blend the offscreen rendering into the current composite rendering.
+    2. opac like stack, not overriden: ex: opac li:0.3; opac img: 0.5; -> reder both
+    3.
+*/
+.section-my-meals ul li {
+    /*list-style-type: none;
+    #cleanCode 
+    */
+    width: 25%;
+    float: left;
+    overflow: hidden;
+    background-color: #000;
+    /*opacity: 0.8;*/
+    /*read #doc Opac*/
+}
+.section-my-meals img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s;
+    transform: scale(1.2);
+    opacity: .7;
+}
+.section-my-meals img:hover {
+    opacity: 1;
+    width: 100%;
+    transform: scale(1.05);
+}
+/*.section-my-meal {
+    width: 25%;
+    float: left;
+    overflow: hidden; 
+    applies to the content of a block level elem
+    background-color: #000;
+    background-image: url(img/back-customers.jpg);
+    background-color or background-image: when a div alrdy has an img, 
+    bckGr-colr or bckGr-img only works (aka: can be seen by human eyes) when <img> has opacity < 1; 
+    not opacity of its container bc the bckGr-color will affected by opacity
+    ---Descr: This property sets the background color of an element. The color is drawn behind any background images
+    
+}
+.section-my-meal:last-of-type {
+    clear: right;
+}*/
+
+/*-----SECTION-STEPS-----*/
+.section-my-steps {
+    color: #888;
+    background-color: #e8e8e8;
+}
+.my-steps-box {
+    padding: 20px 0;
+}
+.my-steps-box:first-of-type {
+    text-align: right;
+    padding-right: 30px;
+}
+.my-steps-box:last-of-type {
+    text-align: left;
+    padding-left: 30px;
+}
+.my-steps-box > img {
+    width: 40%;
+}
+.my-step-detail {
+    /*clear: both;*/
+    margin-bottom: 30px;
+}
+.my-step-detail:last-of-type {
+    margin-bottom: 50px;
+}
+.my-step-detail > div {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    /*#cleanCode instructor ko can margin-bottom:*/ 
+    border: 2px solid #e67e22;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: #e67e22;
+    font-size: 150%;
+    font-weight: 300;
+    text-align: center;
+}
+.my-step-detail > div > span {
+    vertical-align: middle;
+}
+.my-step-detail > p {
+    margin-bottom: 10%;
+    font-size: 20px;
+    text-align: justify;
+}
+.my-steps-box {
+    /*margin-top: 30px;*/
+    /*margin-bottom: 30px;*/
+}
+.my-btn-img img{
+    height: 60px;
+    margin-right: 10px;
+}
+.my-btn-img img:last-of-type {
+    margin-right: 0;
+}
+/*-----CITIES-----*/
+.my-city-box > img {
+    width: 100%;
+}
+.my-city-box h3 {
+    margin: 10px 0;
+}
+.my-city-box a {
+    color: #e67e22;
+}
+.my-city-box i {
+    color: #e67e22;
+}
+.my-city-box i:after {
+    margin-left: 15px;
+}
+/*------------------------------*/
+/*-----CUSTOMER-----*/
+/*------------------------------*/
+.section-my-customers {
+    /*clear: both;*/
+    color: #fff;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(img/back-customers.jpg);
+    background-size: cover; 
+    background-attachment: fixed;
+}
+.my-cust-box {
+    /*padding-top: 50px;*/
+}
+.my-cust-box blockquote {
+    /*day la code of instructor*/
+    font-style: italic;
+    position: relative;
+    margin-top: 50px; /*why??? tai sao margin bottm of <h2> doesnt push it downwards*/
+    line-height: 145%;
+    /*line-height: amount of space above and below inline elements.*/
+    padding: 1%;
+    margin-bottom: 20px;
+    
+/*    ??? 1. ko hieu lam sao de canh thang hang dau quote \"
+        2. ko hieu code instr*/
+    /*The line-height property defines the amount of space above and below inline elements. 
+    That is, elements that are set to display: inline or display: inline-block. 
+    This property is most often used to set the leading for lines of text.*/
+}
+.my-cust-box blockquote:before {
+    /*line-height: 200%;*/
+    content: "\201C";
+    font-style: italic;
+    font-size: 500%;
+    display: block;
+    /*default: inline block*/
+    /*margin-bottom: -60px;*/
+    
+    /*duoi day la code canh dau quote thang hang va chinh len cho dep* - of instructor*/
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    /*position absolute is not in normal flow (not test w/ ralative)
+      position: static; is always positioned according to the normal flow of the page:
+    */
+/*    Margins make little sense on absolutely positioned elements since such elements are removed from the normal flow,
+    -> they cannot push away other elems on the page.*/
+}
+.my-cust-box > cite > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+/*------------------------------*/
+/*-----OFFER-----*/
+/*------------------------------*/
+.section-my-offers {
+    background-color: #eee;
+}
+.my-offer {
+    background-color: #fff;
+    border-radius: 5px;
+}
+.my-offer div {
+    padding: 20px 20px;
+    border-bottom: 1px #ccc solid;
+}
+.my-offer div:last-of-type {
+    text-align: center;
+    border-bottom: none;
+}
+.my-offer div:first-of-type {
+    font-size: 80%;
+}
+/*.my-offer-detail {
+    border-top: 1px #c0c0c0 solid;
+    border-bottom: 1px #c0c0c0 solid;
+    font-size: 22px;
+}*/
+.my-price {
+    color: #e67e22;
+/*    font-size: 20px;
+    font-weight: 300;*/
+    /*#design #cleanCode This is bad design, <p> inherits from parent (font size and weight)*/
+    
+}
+.my-price span {
+    font-size: 300%;
+    /* #design #cleanCode
+    inherits from parent [250% of (90% of 20px from parent%: 18px)]*/
+    font-weight: 100;
+    /*span doesnt inherit font weight from parent;
+    font-weight prop defined in html will not take effect
+    */
+    margin-right: 10px;
+}
+/*.my-price-descr {
+    font-size: 80%;
+}*/
+/*.my-offer-btn {
+    text-align: center;
+    wtf is this for -> bad #design bad code
+}*/
+/*------------------------------*/
+/*-----MY-FORM-----*/
+/*------------------------------*/
+.my-form {
+    margin: 0 auto;
+    max-width: 700px;
+}
+.my-form-detail {
+    width: 100%;
+    /*padding: 10px 0;*/
+}
+.my-form-detail:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+    /*bc .my-form-detail > div  float:left; -> parent not recognize -> close after .. (still not explained why, maybe normal flow??) -> clearfix;*/
+.my-form-detail > div {
+    /*display: inline-block;*/
+    /*khong dung cai nay vi o last div <textarea> 1st div se can theo baseline of div .my-form-detail*/
+    float: left;
+    display: block;
+    margin: 10px 0;
+}
+.my-form-detail > div:first-of-type {
+    width: 30%;
+}
+.my-form-detail > div:last-of-type {
+    width: 70%;
+}
+/*    bad #design #cleanCode
+    nen use 1 class gen .span-2-of-3* nhu instructor*/
+.my-form input[type=text], select, textarea {
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+}
+/*.my-form-detail div {
+    display: inline-block;
+}*/
+
+/*td {
+    font-size: 20px;
+    padding: 10px 5px 20px 10px;
+}*/
+/*input[type=text], textarea, select {
+    font-size: 20px;
+    width: 80%;
+}*/
+/*------------------------------*/
+/*-----FOOTER-----*/
+/*------------------------------*/
+footer {
+    background-color: #2b2b2b;
+    color: #919191;
+    font-size: 80%;
+    padding: 70px 0;
+}
+/*.small-menu:first-of-type {
+    position: absolute;
+    left: 0px;
+}
+.small-menu:last-of-type {
+    position: absolute;
+    right: 0;
+}*/
+.my-footer-nav li
+,.my-social-links li
+
+{
+    display: inline-block;
+    margin-right: 20px;
+}
+.my-footer-nav li:last-child,
+.my-social-links li:last-child {
+    margin-right: 0;
+}
+.my-footer-nav li, .my-social-links li:hover {
+    cursor: pointer;
+}
+.my-footer-nav li:hover {
+    color: #ccc;
+}
+.my-social-links {
+    float: right;
+}
+.my-social-links .my-icon-small {
+    color: #919191;
+}
+footer p {
+    text-align: center;
+    margin-top: 20px;
+}

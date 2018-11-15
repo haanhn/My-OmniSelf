@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-Sep-2018, 17:39:59
+    Author     : DELL
+*/
+
+
+/*focus on the col itself (class general) (cach trinh bay cac cot tren browser, not the content in the col -> class spec)
+use margin (gen) vs padding (spec) (vi co box-sizing: border-box; da include padding)
+*/
+.my-col {
+    float: left;
+    /*WHYYYY????*/
+/*    float affect (diabled / cant be seen) padding-bottom of <section>
+    display: inline-block; does not
+    -> .clearfix class after .my-row*/
+    /*chua giai thich duoc tai sao ???????*/
+    /*https://www.w3schools.com/css/css_float.asp phai giai thich dc het cac vi du*/
+    margin-left: 1.6%;
+    display: block;
+    /*why*/
+}
+.my-col:first-child {
+    margin-left: 0;
+}

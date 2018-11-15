@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29-Aug-2018, 15:09:22
+    Author     : DELL
+*/
+.my-icon-big {
+    font-size: 350%;
+    /*bc it's in the <i> tag -> content in it*/ 
+    margin-bottom: 10px;
+    /*color: #e67e22;*/
+/*    #design #cleanCode
+    dont put color in this class bc it should be spec for it feature*/
+}
+.my-icon-small {
+    width: 30px;
+    display: inline-block;
+    /*    phai co display: inline-block; vi <i> la the inline
+    width: a px; moi co tac dung*/
+    text-align: center;
+    font-size: 120%;
+/*    color: #e67e22;
+    bad #design #cleanCode, bo ben dac tinh of .intro-box || .city-box*/
+    margin-right: 10px;
+    
+    /*secrets to align text and icons*/
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+/*.my-avatar-small { #design #cleanCode this is bad design  bc it's spec for a section (customer sec)
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+}*/
